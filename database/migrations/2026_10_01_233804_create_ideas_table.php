@@ -15,8 +15,7 @@ $table->string('titulo');
 $table->text('descripcion');
 $table->string('estado')->default('registrada');
 $table->string('autor');
-$table->foreignId('categoria_id')->constrained('categorias');
-//Columna relacionada a categorias
+$table->foreignId('categoria_id')->constrained('categorias'); //Columna relacionada a categorias
 $table->timestamps();
 });
 }
