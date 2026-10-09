@@ -79,10 +79,10 @@ class IdeasTable
                 EditAction::make(),
                 ViewAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
-                ]),
+                ])
             ]);
     }
 }
