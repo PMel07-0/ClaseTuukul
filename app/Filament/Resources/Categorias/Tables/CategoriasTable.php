@@ -14,11 +14,15 @@ class CategoriasTable
     {
         return $table
             ->columns([
-                TextColumn::make('index')
-                    ->label('#')
-                    ->rowIndex(),
+                TextColumn::make('id')
+                    ->label('Id')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('nombre')
-                    ->label('Nombre')
+                    ->label('Categoría')
+                    ->searchable(),
+                TextColumn::make('descripcion')
+                    ->label('Descripción')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->label('Creada el')
@@ -40,7 +44,7 @@ class CategoriasTable
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
-                ]),
+                ])
             ]);
     }
 }

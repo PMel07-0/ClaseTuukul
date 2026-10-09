@@ -10,14 +10,16 @@ use Filament\Tables\Table;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Actions\ViewAction;
 
+
 class IdeasTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+            ->heading('Proyecto Ideas - Lozano Matus Miriam Doyel')
             ->columns([
                 // 1. Columna del número de fila
-                TextColumn::make('index')
+                TextColumn::make('id')
                     ->label('#')
                     ->rowIndex(),
 
@@ -36,22 +38,19 @@ class IdeasTable
                 // 4. Columna del estado de la idea
                 TextColumn::make('estado')
                     ->label('Estado')
-                    ->sortable()
-                    ->toggleable(),
+                    ->sortable(),
 
                 // 5. Columna del autor
                 TextColumn::make('autor')
                     ->label('Autor')
                     ->searchable()
-                    ->sortable()
-                    ->toggleable(),
+                    ->sortable(),
 
                 // 6. Columna de relación con Categoría
                 TextColumn::make('categoria.nombre')
                     ->label('Categoría')
                     ->searchable()
-                    ->sortable()
-                    ->toggleable(),
+                    ->sortable(),
 
                 // 7. Columna de fechas de creado
                 TextColumn::make('created_at')
