@@ -8,6 +8,7 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateCategoria extends CreateRecord
 {
     protected static string $resource = CategoriaResource::class;
+    protected static ?string $title = 'Registrar Nueva Categoría';
     //elimina el botón de crear otro registro
     protected static bool $canCreateAnother = false;
 

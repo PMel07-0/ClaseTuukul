@@ -9,6 +9,12 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Actions\ViewAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\RestoreAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Tables\Filters\TrashedFilter;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 
 class IdeasTable
@@ -73,15 +79,21 @@ class IdeasTable
                         'en revisión' => 'En revision',
                         'aprobada' => 'Aprobada',      
                         'rechazada' => 'Rechazada',
-                    ])
+                    ]),
+                    TrashedFilter::make(),
             ])
             ->recordActions([
                 EditAction::make(),
                 ViewAction::make(),
+                Deleteaction::make(),
+                Restoreaction::make(),
+                ForceDeleteaction::make(),
+
+
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                   DeleteBulkAction::make(),
                 ])
             ]);
     }
