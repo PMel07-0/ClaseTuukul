@@ -15,6 +15,9 @@ use Filament\Actions\ForceDeleteAction;
 use Filament\Tables\Filters\TrashedFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Actions\Action;
+use App\Models\Idea;
+use Filament\Notifications\Notification;
 
 
 class IdeasTable
@@ -22,7 +25,7 @@ class IdeasTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->heading('Proyecto Ideas - Lozano Matus Miriam Doyel')
+            ->heading('Proyecto Ideas - Méndez Jiménez Paola Melissa')
             ->columns([
                 // 1. Columna del número de fila
                 TextColumn::make('id')
@@ -32,12 +35,14 @@ class IdeasTable
                 // 2. Columna del título
                 TextColumn::make('titulo')
                     ->label('Idea')
+                    ->wrap()
                     ->searchable()
                     ->sortable(),
 
                 // 3. Columna de descripción
                 TextColumn::make('descripcion')
                     ->label('Descripción')
+                    ->wrap()
                     ->searchable()
                     ->sortable(),
 
@@ -50,12 +55,14 @@ class IdeasTable
                 TextColumn::make('autor')
                     ->label('Autor')
                     ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
 
                 // 6. Columna de relación con Categoría
                 TextColumn::make('categoria.nombre')
                     ->label('Categoría')
                     ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
 
                 // 7. Columna de fechas de creado
@@ -88,12 +95,24 @@ class IdeasTable
                 Deleteaction::make(),
                 Restoreaction::make(),
                 ForceDeleteaction::make(),
-
-
+                Action::make('aprobar') 
+                    ->label('Aprobar')
+                    ->color('success')
+                    ->requiresConfirmation()
+                    ->modalHeading('Confirmación')
+                    ->modalDescription('¿Desea aprobar esta idea?')
+                ->Action(function(Idea $record){
+                    $record->update(['estado'=>'aprobada']);
+                    Notification::make()
+                        ->Title('Idea aprobada con éxito.')
+                        ->success()
+                        ->send();
+                })
+                ->visible(fn(Idea $record) => $record->estado !== 'aprobada')
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                   DeleteBulkAction::make(),
+                   //DeleteBulkAction::make(),
                 ])
             ]);
     }
