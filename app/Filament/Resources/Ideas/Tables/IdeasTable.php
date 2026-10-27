@@ -2,20 +2,20 @@
 
 namespace App\Filament\Resources\Ideas\Tables; 
 
-use Filament\Tables\Actions\BulkActionGroup; 
-use Filament\Tables\Actions\DeleteBulkAction; 
-use Filament\Tables\Actions\EditAction; 
+use Filament\Actions\BulkActionGroup; 
+use Filament\Actions\DeleteBulkAction; 
+use Filament\Actions\EditAction; 
 use Filament\Tables\Columns\TextColumn; 
 use Filament\Tables\Table; 
 use Filament\Tables\Filters\SelectFilter; 
-use Filament\Tables\Actions\ViewAction; 
-use Filament\Tables\Actions\DeleteAction; 
-use Filament\Tables\Actions\RestoreAction; 
-use Filament\Tables\Actions\ForceDeleteAction; 
+use Filament\Actions\ViewAction; 
+use Filament\Actions\DeleteAction; 
+use Filament\Actions\RestoreAction; 
+use Filament\Actions\ForceDeleteAction; 
 use Filament\Tables\Filters\TrashedFilter; 
 use Illuminate\Database\Eloquent\Builder; 
 use Illuminate\Database\Eloquent\SoftDeletingScope; 
-use Filament\Tables\Actions\Action; 
+use Filament\Actions\Action; 
 use App\Models\Idea; 
 use Filament\Notifications\Notification;
 use Filament\Forms\Components\TextInput; // Necesario para el campo de observación
@@ -25,7 +25,7 @@ class IdeasTable
     public static function configure(Table $table): Table 
     { 
         return $table 
-            ->heading('Proyecto Ideas - Méndez Jiménez Paola Melissa') 
+            ->heading('Proyecto Ideas - Méndez Jiménez Paola Melissa, Lozano Matus Miriam Doyel') 
             ->columns([ 
                 // 1. Columna del número de fila 
                 TextColumn::make('id') 
@@ -82,12 +82,12 @@ class IdeasTable
                     ]), 
                 TrashedFilter::make(), 
             ]) 
-            ->actions([ // Corrección: Se cambió recordActions por actions y se agregaron las comas faltantes
+            ->actions([ 
                 EditAction::make(), 
                 ViewAction::make(), 
-                DeleteAction::make(), // Corrección: Mayúscula en la "A"
-                RestoreAction::make(), // Corrección: Mayúscula en la "A"
-                ForceDeleteAction::make(), // Corrección: Mayúscula en la "A"
+                DeleteAction::make(),
+                RestoreAction::make(), 
+                ForceDeleteAction::make(), 
                 
                 Action::make('aprobar') 
                     ->label('Aprobar') 
@@ -95,35 +95,36 @@ class IdeasTable
                     ->requiresConfirmation() 
                     ->modalHeading('Confirmación') 
                     ->modalDescription('¿Desea aprobar esta idea?') 
-                    ->action(function(Idea $record){ // Corrección: minúscula en ->action()
+                    ->action(function(Idea $record){ 
                         $record->update(['estado'=>'aprobada']); 
                         Notification::make() 
-                            ->title('Idea aprobada con éxito.') // Corrección: minúscula en ->title()
+                            ->title('Idea aprobada con éxito.') 
                             ->success() 
                             ->send(); 
                     }) 
                     ->visible(fn(Idea $record) => $record->estado !== 'aprobada'), // Coma agregada
                 
-                Action::make('rechazar') 
+                Action::make('rechazar')
+                    ->label('Rechazar') 
                     ->color('danger')
-                    ->schema([ 
-                        TextInput::make('observacion') // Corrección: Se cambió TextColumn por TextInput
-                            ->label('Observación') 
-                            ->helperText('Motivo de rechazo') 
-                            ->required(), 
-                    ]) 
+                    ->form([ 
+                        TextInput::make('observacion')
+                            ->label('Observación')
+                            ->helperText('Motivo de rechazo')
+                            ->required(),
+                    ])
                     ->action(function (array $data, Idea $record): void { 
-                        $record->estado='rechazada'; 
-                        $record->observacion=$data['observacion']; 
+                        $record->estado = 'rechazada'; 
+                        $record->observacion = $data['observacion']; 
                         $record->save(); 
                         Notification::make() 
-                            ->title('Idea rechazada exitosamente.') // Corrección: minúscula en ->title()
+                            ->title('Idea rechazada exitosamente.') 
                             ->success() 
                             ->send(); 
-                    }) 
-                    ->hidden(fn (Idea $record): bool => $record->estado === 'rechazada'), 
+                }) 
+                ->hidden(fn (Idea $record): bool => $record->estado === 'rechazada'),
             ]) 
-            ->bulkActions([ // Corrección: Se cambió toolbarActions por bulkActions para los BulkActionGroups
+            ->bulkActions([ 
                 BulkActionGroup::make([ 
                     //DeleteBulkAction::make(), 
                 ]) 
