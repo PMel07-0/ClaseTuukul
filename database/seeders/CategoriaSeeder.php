@@ -38,9 +38,5 @@ class CategoriaSeeder extends Seeder
             'descripcion' => 'Ideas relacionadas con la publicidad y el marketing.'
         ]);
 
-        Categoria::create([
-            'nombre' => 'Tecnologia',
-            'descripcion' => 'Ideas relacionadas con los sistemas y TI.'
-        ]);
     }
 }

@@ -19,6 +19,7 @@ use Filament\Actions\Action;
 use App\Models\Idea; 
 use Filament\Notifications\Notification;
 use Filament\Forms\Components\TextInput; // Necesario para el campo de observación
+use Filament\Support\Icons\Heroicon; //Libreria de iconos
 
 class IdeasTable 
 { 
@@ -91,12 +92,16 @@ class IdeasTable
                 
                 Action::make('aprobar') 
                     ->label('Aprobar') 
+                    ->icon(Heroicon::HandThumbUp)
                     ->color('success') 
                     ->requiresConfirmation() 
                     ->modalHeading('Confirmación') 
                     ->modalDescription('¿Desea aprobar esta idea?') 
                     ->action(function(Idea $record){ 
-                        $record->update(['estado'=>'aprobada']); 
+                        $record->update([
+                            'estado'=>'aprobada',
+                            'obserivacion' => null,
+                        ]); 
                         Notification::make() 
                             ->title('Idea aprobada con éxito.') 
                             ->success() 
@@ -106,12 +111,14 @@ class IdeasTable
                 
                 Action::make('rechazar')
                     ->label('Rechazar') 
+                    ->icon(Heroicon::HandThumbDown)
                     ->color('danger')
+                    ->modalHeading('Rechazo') 
+                    ->modalDescription('¿Desea rechazar esta idea?') 
                     ->form([ 
                         TextInput::make('observacion')
                             ->label('Observación')
-                            ->helperText('Motivo de rechazo')
-                            ->required(),
+                            ->helperText('Motivo de rechazo'),
                     ])
                     ->action(function (array $data, Idea $record): void { 
                         $record->estado = 'rechazada'; 
@@ -124,6 +131,8 @@ class IdeasTable
                 }) 
                 ->hidden(fn (Idea $record): bool => $record->estado === 'rechazada'),
             ]) 
+            ->recordUrl(null)
+            ->recordAction(null)
             ->bulkActions([ 
                 BulkActionGroup::make([ 
                     //DeleteBulkAction::make(), 

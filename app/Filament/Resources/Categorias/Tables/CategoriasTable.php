@@ -16,8 +16,9 @@ class CategoriasTable
             ->columns([
                 TextColumn::make('id')
                     ->label('Id')
-                    ->searchable()
-                    ->sortable(),
+                    ->wrap() 
+                    ->searchable() 
+                    ->sortable(), 
                 TextColumn::make('nombre')
                     ->label('Categoría')
                     ->searchable(),
@@ -41,6 +42,8 @@ class CategoriasTable
             ->recordActions([
                 EditAction::make(),
             ])
+            ->recordUrl(null)
+            ->recordAction(null)
             ->toolbarActions([
                 BulkActionGroup::make([
                     //DeleteBulkAction::make(),

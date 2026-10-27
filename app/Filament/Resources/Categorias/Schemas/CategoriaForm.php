@@ -20,6 +20,10 @@ class CategoriaForm
                     ->placeholder('Ej. Categoría') 
                     //->disabled(1 != 1) -> modulo para desabilitar un campo
                     //->inlineLabel() -> airve para poner todo en una sola linea
+                    ->unique()
+                    ->validationMessages([
+                        'unique' => 'Ya existe una categoría registrada con este nombre.',
+                    ])
                     ->required(),
                 Textarea::make('descripcion')
                     ->label('Descripción')
