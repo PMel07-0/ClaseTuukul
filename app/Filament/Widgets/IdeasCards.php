@@ -12,7 +12,7 @@ class IdeasCards extends StatsOverviewWidget
     protected function getStats(): array
     {
         $registradas = Idea::where('estado', 'registrada') -> count();
-        $revision = Idea::where('estado', 'en revision') -> count();
+        $revision = Idea::where('estado', 'en revisión') -> count();
         $aprobadas = Idea::where('estado', 'aprobada') -> count();
         $rechazadas = Idea::where('estado', 'rechazada') -> count();
         
