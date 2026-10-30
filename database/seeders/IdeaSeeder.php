@@ -12,7 +12,7 @@ class IdeaSeeder extends Seeder
     {
         
     
-        Idea::create([
+        Idea::firstOrCreate([
             'titulo' => 'Aplicación para organizar citas veterinarias',
             'descripcion' => 'Sistema para registrar y organizar citas de mascotas.',
             'estado' => 'registrada',
@@ -20,7 +20,7 @@ class IdeaSeeder extends Seeder
             'categoria_id' => 1
         ]);
  
-        Idea::create([
+        Idea::firstOrCreate([
             'titulo' => 'Plataforma para cursos en línea',
             'descripcion' => 'Sistema para ofrecer cursos y materiales educativos.',
             'estado' => 'en revisión',
@@ -29,7 +29,7 @@ class IdeaSeeder extends Seeder
         ]);
 
         //Ideas nuevas de tarea
-        Idea::create([
+        Idea::firstOrCreate([
             'titulo' => 'Aplicación para cuidado de animales',
             'descripcion' => 'Sistema para ofrecer apoyo a distancia, cuidados y listado de veterinarias cercanas.',
             'estado' => 'registrada',
@@ -37,7 +37,7 @@ class IdeaSeeder extends Seeder
             'categoria_id' => 3
         ]);
 
-        Idea::create([
+        Idea::firstOrCreate([
             'titulo' => 'Página web para consultas de tecnologia',
             'descripcion' => 'Sistema para encontrar dispositivos de calidad.',
             'estado' => 'en revisión',
@@ -45,7 +45,7 @@ class IdeaSeeder extends Seeder
             'categoria_id' => 1
         ]);
 
-        Idea::create([
+        Idea::firstOrCreate([
             'titulo' => 'Red social para desarrolladores',
             'descripcion' => 'Plataforma para compartir proyectos y conocimientos tecnológicos.',
             'estado' => 'registrada',
@@ -53,7 +53,7 @@ class IdeaSeeder extends Seeder
             'categoria_id' => 1
         ]);
 
-        Idea::create([
+        Idea::firstOrCreate([
             'titulo' => 'Administrador de licencias de software',
             'descripcion' => 'Aplicación para controlar la vigencia y uso de licencias digitales.',
             'estado' => 'registrada',
@@ -61,7 +61,7 @@ class IdeaSeeder extends Seeder
             'categoria_id' => 1
         ]);
 
-        Idea::create([
+        Idea::firstOrCreate([
             'titulo' => 'Sistema de gestión de tareas escolares',
             'descripcion' => 'Plataforma para asignar y evaluar actividades académicas.',
             'estado' => 'en revisión',
@@ -69,7 +69,7 @@ class IdeaSeeder extends Seeder
             'categoria_id' => 2
         ]);
 
-        Idea::create([
+        Idea::firstOrCreate([
             'titulo' => 'Aplicación de tutorías virtuales',
             'descripcion' => 'Sistema que conecta estudiantes con tutores especializados.',
             'estado' => 'en revisión',
@@ -77,7 +77,7 @@ class IdeaSeeder extends Seeder
             'categoria_id' => 2
         ]);
 
-        Idea::create([
+        Idea::firstOrCreate([
             'titulo' => 'Historial clínico digital',
             'descripcion' => 'Sistema para almacenar información médica de forma segura.',
             'estado' => 'en revisión',
@@ -85,7 +85,7 @@ class IdeaSeeder extends Seeder
             'categoria_id' => 3
         ]);
 
-        Idea::create([
+        Idea::firstOrCreate([
             'titulo' => 'Monitor inteligente de medicamentos',
             'descripcion' => 'Aplicación para recordar horarios y dosis de medicinas.',
             'estado' => 'registrada',
@@ -93,7 +93,7 @@ class IdeaSeeder extends Seeder
             'categoria_id' => 3
         ]);
 
-        Idea::create([
+        Idea::firstOrCreate([
             'titulo' => 'Aplicación de monitoreo ambiental',
             'descripcion' => 'Herramienta para reportar niveles de contaminación en zonas urbanas.',
             'estado' => 'registrada',
@@ -101,7 +101,7 @@ class IdeaSeeder extends Seeder
             'categoria_id' => 4
         ]);
 
-        Idea::create([
+        Idea::firstOrCreate([
             'titulo' => 'Portal de encuestas de mercado',
             'descripcion' => 'Herramienta para recopilar opiniones y analizar tendencias de consumo.',
             'estado' => 'en revisión',
@@ -109,7 +109,7 @@ class IdeaSeeder extends Seeder
             'categoria_id' => 5
         ]);
 
-        Idea::create([
+        Idea::firstOrCreate([
             'titulo' => 'Sistema de gestión de reciclaje',
             'descripcion' => 'Plataforma para registrar materiales reciclables y puntos de recolección.',
             'estado' => 'en revisión',

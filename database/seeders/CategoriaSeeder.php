@@ -12,28 +12,28 @@ class CategoriaSeeder extends Seeder
         
 
     
-        Categoria::create([
+        Categoria::firstOrCreate([
             'nombre' => 'Tecnología',
             'descripcion' => 'Ideas relacionadas con tecnología y software.'
         ]);
         
-        Categoria::create([
+        Categoria::firstOrCreate([
             'nombre' => 'Educación',
             'descripcion' => 'Ideas relacionadas con educación y aprendizaje.'
         ]);
  
-        Categoria::create([
+        Categoria::firstOrCreate([
             'nombre' => 'Salud',
             'descripcion' => 'Ideas relacionadas con salud y bienestar.'
         ]);
  
-        Categoria::create([
+        Categoria::firstOrCreate([
             'nombre' => 'Medio ambiente',
             'descripcion' => 'Ideas relacionadas con el cuidado del medio ambiente.'
         ]);
 
         //Categorías nuevas de tarea
-        Categoria::create([
+        Categoria::firstOrCreate([
             'nombre' => 'Marketing',
             'descripcion' => 'Ideas relacionadas con la publicidad y el marketing.'
         ]);
