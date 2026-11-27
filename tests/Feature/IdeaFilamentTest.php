@@ -6,6 +6,8 @@ use App\Filament\Resources\Ideas\Pages\EditIdea;
 use App\Filament\Resources\Ideas\Pages\ListIdeas;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
+use Filament\Actions\Testing\TestAction;
+
 uses(RefreshDatabase::class);
 
 beforeEach(function(){
@@ -67,3 +69,37 @@ test('Editar una idea sin descripción', function(){
         'descripcion' => 'Aplicación para compartir viajes',
     ]);
 });
+
+test('Aprobar una idea', function(){
+    Livewire::test(ListIdeas::class) //Listado de ideas
+        ->assertSuccessful() //Verificación de una entrada correcta
+        ->assertCanSeeTableRecords([ //Que pueda ver los registros de la tabla
+            $this->idea
+        ])
+        ->assertActionVisible(TestAction::make('aprobar')->table($this->idea)) //Que exista el botón de aprobar
+        ->callAction(TestAction::make('aprobar')->table($this->idea)); //Apretar el boton de aceptar
+    $this->assertDatabaseHas('ideas', [
+        'id' => 1,
+        'estado' => 'aprobada',
+    ]);
+});
+
+test('Rechazar una idea', function(){
+    Livewire::test(ListIdeas::class) //Listado de ideas
+        ->assertSuccessful() //Verificación de una entrada correcta
+        ->assertCanSeeTableRecords([ //Que pueda ver los registros de la tabla
+            $this->idea
+        ])
+        ->assertActionVisible(TestAction::make('rechazar')->table($this->idea)) //Que exista el botón de rechazar
+        ->callAction(TestAction::make('rechazar')->table($this->idea),
+        data:[
+            'observacion' => 'La idea necesita más información'
+        ]) //Apretar el boton de rechazar
+        ->assertHasNoTableActionErrors();
+    $this->assertDatabaseHas('ideas', [
+        'id' => 1,
+        'estado' => 'rechazada',
+    ]);
+});
+
+
